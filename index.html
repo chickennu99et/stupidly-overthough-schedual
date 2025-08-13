@@ -1,0 +1,148 @@
+<html>
+	<body>
+	<h2 id="whatsNext">loading, please wait</h2>
+	<h1 id="time">loading, please wait</h1>
+	<button onclick="swapLunch(1)">a</button>
+	<button onclick="swapLunch(2)">b</button>
+	<button onclick="swapLunch(3)">c</button>
+	</body>
+	<script>
+		const whatsNextId = document.getElementById("whatsNext");
+		const timeId = document.getElementById("time");
+		
+		const firstHalf = ["First Period", "Second Period", "Third Period", "Fourth Period"];
+		const BLunch = ["First Half of Fifth Period", "B lunch", "Second Half of Fifth Period"];
+		const ALunch = ["A Lunch", "Fifth Period"];
+		const CLunch = ["Fifth Period", "C Lunch"];
+		const secondHalf = ["Sixth Period", "Seventh Period"];
+		
+		const schedualMakerPassingPeriod = 360000;
+		const schedualMakerStandardPeriod = 3000000;
+		const schedualMakerInklein = 1800000;
+		const schedualMakerBLunchHalfPeriod = 1200000;
+		const schedualMakerBLunchSecondHalfPeriod = 1500000;
+		
+		var timeSinceLastLoad = Date.now();
+		var secondsSinceLoad = 0;
+		var pageLoaded = true;
+		var lunchPeriod = swapLunch(isCookie);
+		var schedual = [];
+		
+		
+		
+		function swapLunch(lunchChar){
+			lunchPeriod = lunchChar
+			alert(lunchPeriod);
+			load();
+		}
+		
+		
+		
+		function printTime(time, period){
+			whatsNextId.innerHTML = period;
+			timeId.innerHTML = time;
+		}
+		
+		
+		
+		document.addEventListener("visibilitychange", function() {
+			if (document.hidden) {
+				pageLoaded = false;
+			} else {
+				pageLoaded = true;
+				load();
+			}
+		});
+		
+		function load(){
+			timeSinceLastLoad = Date.now();
+			secondsSinceLoad = 0;
+			countTime();
+			schedualMaker();
+		}
+		
+		function schedualMaker(){
+			if(lunchPeriod == 1){
+				schedual +=  firstHalf + ALunch + secondHalf;
+			}else if(lunchPeriod == 2){
+				schedual +=  firstHalf + BLunch + secondHalf;
+			}else{
+				schedual +=  firstHalf + CLunch + secondHalf;
+			}
+			makeCookie(lunchPeriod);
+		}
+		
+		function countTime(){
+			if(secondsSinceLoad>=60){
+				try{
+					timeSinceLastLoad = Date.now();
+					secondsSinceLoad==0;
+				}
+					catch(err){
+					console.log(err.message);
+				}
+			}
+			secondsSinceLoad++;
+			if(pageLoaded){
+				setTimeout(countTime, 1000);
+			}
+		}
+		
+		
+		
+		function getMilliseconds(){
+			return timeSinceLastLoad+secondsSinceLoad*1000;
+		}
+		
+		function TimeToReadableString(time){
+			let string = ""
+			if((time%86400000)>=3600000){
+				string += Math.floor(time%86400000)/3600000);
+			}
+			if((time%86400000)>=3600000 && (time%3600000)>=60000) {
+				string += " : ";
+			}
+			if((time%3600000)>=60000){
+				string += Math.floor(time%3600000)/60000);
+			}
+			if((time%3600000)>=60000 && (time%60000)>=1000){
+				string += " : ";
+			}
+			if((time%60000)>=1000){
+				string += Math.floor((time%60000)/1000);
+			}
+		}
+		
+		
+		
+		function getCookie(name) {
+		let CookieName = name + "=";
+		let splits = document.cookie.split(';');
+		for(let i = 0; i < splits.length; i++) {
+		let split = splits[i];
+		while (split.charAt(0) == ' ') {
+		split = split.substring(1);
+		}
+		if (split.indexOf(CookieName) == 0) {
+		return split.substring(CookieName.length, split.length);
+		}
+		}
+		return "";
+		}
+		function makeCookie(variable){
+		let timeee = getMilliseconds();
+		timeee.setTime(timeee.getTime() + (31536000000));
+		timeee = "expires=" + timeee.toUTCString();
+		document.cookie = "lunchVar=" + variable + ";" + timeee + ";path=/";
+		
+		}
+		function isCookie(){
+		var coookie = getCookie("lunchVar");
+		if(coookie != ""){
+		return coookie;
+		}else{
+		return 2;
+		}
+		}
+	</script>
+</html>
