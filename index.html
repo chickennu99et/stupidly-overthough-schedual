@@ -116,33 +116,32 @@
 		
 		
 		function getCookie(name) {
-		let CookieName = name + "=";
-		let splits = document.cookie.split(';');
-		for(let i = 0; i < splits.length; i++) {
-		let split = splits[i];
-		while (split.charAt(0) == ' ') {
-		split = split.substring(1);
-		}
-		if (split.indexOf(CookieName) == 0) {
-		return split.substring(CookieName.length, split.length);
-		}
-		}
-		return "";
+			let CookieName = name + "=";
+			let splits = document.cookie.split(';');
+			for(let i = 0; i < splits.length; i++) {
+				let split = splits[i];
+				while (split.charAt(0) == ' ') {
+					split = split.substring(1);
+				}
+				if (split.indexOf(CookieName) == 0) {
+					return split.substring(CookieName.length, split.length);
+				}
+			}
+			return "";
 		}
 		function makeCookie(variable){
-		let timeee = getMilliseconds();
-		timeee.setTime(timeee.getTime() + (31536000000));
-		timeee = "expires=" + timeee.toUTCString();
-		document.cookie = "lunchVar=" + variable + ";" + timeee + ";path=/";
-		
+			let timeee = getMilliseconds();
+			timeee.setTime(timeee.getTime() + (31536000000));
+			timeee = "expires=" + timeee.toUTCString();
+			document.cookie = "lunchVar=" + variable + ";" + timeee + ";path=/";
 		}
 		function isCookie(){
-		var coookie = getCookie("lunchVar");
-		if(coookie != ""){
-		return coookie;
-		}else{
-		return 2;
-		}
+			var coookie = getCookie("lunchVar");
+			if(coookie != ""){
+				return coookie;
+			}else{
+				return 2;
+			}
 		}
 	</script>
 </html>
