@@ -63,11 +63,11 @@
 		
 		function schedualMaker(){
 			if(lunchPeriod == 1){
-				schedual =  firstHalf + ALunch + secondHalf;
+				schedual =  firstHalf.concat(ALunch,secondHalf);
 			}else if(lunchPeriod == 2){
-				schedual =  firstHalf + BLunch + secondHalf;
+				firstHalf.concat(BLunch,secondHalf);
 			}else{
-				schedual =  firstHalf + CLunch + secondHalf;
+				firstHalf.concat(CLunch,secondHalf);
 			}
 			makeCookie(lunchPeriod);
 		}
@@ -76,7 +76,7 @@
 			if(secondsSinceLoad>=60){
 				try{
 					timeSinceLastLoad = Date.now();
-					secondsSinceLoad==0;
+					secondsSinceLoad=0;
 				}
 					catch(err){
 					console.log(err.message);
@@ -95,21 +95,21 @@
 		}
 		
 		function TimeToReadableString(time){
-			let string = ""
+			let string = "";
 			if((time%86400000)>=3600000){
-				string += Math.floor(time%86400000)/3600000);
+				string += (Math.floor(time%86400000)/3600000);
 			}
 			if((time%86400000)>=3600000 && (time%3600000)>=60000) {
 				string += " : ";
 			}
 			if((time%3600000)>=60000){
-				string += Math.floor(time%3600000)/60000);
+				string += (Math.floor(time%3600000)/60000);
 			}
 			if((time%3600000)>=60000 && (time%60000)>=1000){
 				string += " : ";
 			}
 			if((time%60000)>=1000){
-				string += Math.floor((time%60000)/1000);
+				string += (Math.floor((time%60000)/1000);
 			}
 		}
 		
