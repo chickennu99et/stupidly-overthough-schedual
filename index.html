@@ -131,7 +131,7 @@
 		}
 		function makeCookie(variable){
 			let timeee = getMilliseconds();
-			timeee.setTime(timeee.getTime() + (31536000000));
+			timeee.setTime(timeee + (31536000000));
 			timeee = "expires=" + timeee.toUTCString();
 			document.cookie = "lunchVar=" + variable + ";" + timeee + ";path=/";
 		}
