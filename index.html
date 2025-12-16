@@ -25,7 +25,7 @@
 		var timeSinceLastLoad = Date.now();
 		var secondsSinceLoad = 0;
 		var pageLoaded = true;
-		var lunchPeriod = swapLunch(isCookie);
+		var lunchPeriod = isCookie();
 		var schedual = [];
 		
 		
@@ -63,11 +63,11 @@
 		
 		function schedualMaker(){
 			if(lunchPeriod == 1){
-				schedual +=  firstHalf + ALunch + secondHalf;
+				schedual =  firstHalf + ALunch + secondHalf;
 			}else if(lunchPeriod == 2){
-				schedual +=  firstHalf + BLunch + secondHalf;
+				schedual =  firstHalf + BLunch + secondHalf;
 			}else{
-				schedual +=  firstHalf + CLunch + secondHalf;
+				schedual =  firstHalf + CLunch + secondHalf;
 			}
 			makeCookie(lunchPeriod);
 		}
